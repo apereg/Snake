@@ -115,6 +115,7 @@ int menu(void){
 	/* Se muestra una lista de opciones que solo avanza cuando la opcion elegida esta entre 1 y 3. */
 	do{	
 		printf("Bienvenido a Snake.\n");
+		fprintf(fichero_salida, "Bienvenido a Snake.\n");
 		printf ("Elige una opcion:\n");
 		fprintf(fichero_salida, "Elige una opcion:\n");  
 		printf("1) Juego contra el ordenador.\n");
@@ -145,13 +146,13 @@ void imprimir_tablero(int tablero[FILAS][COLUMNAS]){
 	fprintf(fichero_salida, "\t\t\t      ");		
 	for (j=1; j<=COLUMNAS; j++){
 		// En funcion de si el valor es de uno o dos digitos imprimo o no un espacio.
-		if(j<9){ 
-			printf(" %d ", j+1);
-			fprintf(fichero_salida, " %d ", j+1);		
+		if(j<=9){ 
+			printf(" %d ", j);
+			fprintf(fichero_salida, " %d ", j);		
 		}
 		else{
-			printf("%d ", j+1);
-			fprintf(fichero_salida, "%d ", j+1);		
+			printf("%d ", j);
+			fprintf(fichero_salida, "%d ", j);		
 		}
 	}
 	printf("\n");
@@ -421,6 +422,7 @@ void jugar_ordenador(int tablero_partida){
 					scanf("%d",&nuevacolumna);
 					nuevacolumna--;
 					fprintf(fichero_salida, "Se ha seleccionado la columna %d.\n", nuevacolumna);
+					printf("nuevaco %d\n", nuevacolumna);
 					/* Se comprueba si la posicion seleccionada es valida con la funcion selecciona_casilla. */		
 					esValido = selecciona_casilla(tablero, nuevafila, nuevacolumna);
 					if(esValido == 1){  
@@ -500,7 +502,7 @@ void jugar_ordenador(int tablero_partida){
 						}
 
 						/* Si el tamaño es el mismo valor que el tablero sin los bordes, se acaba el juego por victoria */
-						if(tam = ((FILAS-2)*(COLUMNAS-2)) ){
+						if(tam == ((FILAS-2)*(COLUMNAS-2)) ){
 							printf("¡Has ganado!\n");
 							fprintf(fichero_salida, "¡Has ganado!\n");
 							muerte = 1;
@@ -686,7 +688,7 @@ int jugar_contra_otro(void){
 					scanf("%d",&nuevafila);
 					nuevafila--;
 					fprintf(fichero_salida, "Se ha seleccionado la fila %d.\n", nuevafila); 
-					printf("Seleccione la nueva columna\n");
+					printf("Seleccione la nueva columna: ");
 					scanf("%d",&nuevacolumna);
 					nuevacolumna--;
 					fprintf(fichero_salida, "Se ha seleccionado la columna %d.\n", nuevacolumna); 
